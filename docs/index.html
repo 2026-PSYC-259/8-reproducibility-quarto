@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Reproducibility and Quarto Reporting</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Franchak &amp; Holly O’Rourke" />
+    <script src="libs/header-attrs-2.31/header-attrs.js"></script>
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <script src="libs/peerjs-1.3.1/peerjs.min.js"></script>
+    <script src="libs/tiny.toast-1.0.0/toast.min.js"></script>
+    <link href="libs/xaringanExtra-broadcast-0.2.6/broadcast.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-broadcast-0.2.6/broadcast.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Reproducibility and Quarto Reporting
+]
+.subtitle[
+## PSYC 259: Principles of Data Science
+]
+.author[
+### John Franchak &amp; Holly O’Rourke
+]
+
+---
+
+
+
+
+
+
+
+class: inverse, center, middle
+# Sharing &amp; Reproducibility
+---
+# Where to Share
+
+- **OSF update**: OSF is about to become read-only and is no longer allowing creation of new projects (as of today)
+
+- Options for open science worklow repos/workspaces: **Open Science Framework (OSF), GitHub, Zenodo**
+
+- All are free platforms that can be used at various stages of the research process
+---
+class: middle
+
+&lt;table class='platform-tbl'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;  &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; &lt;b&gt;OSF&lt;/b&gt; &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; &lt;b&gt;GitHub&lt;/b&gt; &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; &lt;b&gt;Zenodo&lt;/b&gt; &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;b&gt;Primary purpose&lt;/b&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; project management, sharing, preregistration &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; hosting, managing, and sharing code/files &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; long-term archiving and publication of research outputs &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;b&gt;Data/files sharing&lt;/b&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ✓ &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ✓ (though primarily used for coding) &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ✓ &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;b&gt;Version control&lt;/b&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style='color:blue;'&gt;&lt;b&gt;!&lt;/b&gt;&lt;/span&gt; limited to time stamps &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ✓ &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ✓ &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;b&gt;Reproducibility&lt;/b&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ✓ focus on preregistration and documentation &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ✓ focus on computational reproducibility &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ✓ focus on preservation of files &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;b&gt;DOI linking&lt;/b&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ✓ &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style='color:red;'&gt;&lt;b&gt;X&lt;/b&gt;&lt;/span&gt; must be linked to other platform for DOI generation &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ✓ assigns DOI to each public record &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;b&gt;Open science accessibility&lt;/b&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ✓ searchable database! &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style='color:red;'&gt;&lt;b&gt;X&lt;/b&gt;&lt;/span&gt; not a searchable research database &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ✓ searchable database for completed projects &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;b&gt;Main disadvantage&lt;/b&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style='color:red;'&gt;&lt;b&gt;X&lt;/b&gt;&lt;/span&gt; no code editing version control; no new projects &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style='color:red;'&gt;&lt;b&gt;X&lt;/b&gt;&lt;/span&gt; not a searchable database, and generally not designed for research &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style='color:red;'&gt;&lt;b&gt;X&lt;/b&gt;&lt;/span&gt; limited pre-completion project management &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+---
+# Project-Level Reproducibility Tips
+- Sharing is key for reproducibility
+
+  * Use platform to share study protocol, materials, data (when possible), and scripts
+
+  * Ideally you can share enough that your worklow is fully reproducible by an external researcher
+
+  * De-identified data can usually be shared, but make all efforts to anonymize
+---
+# Workflow-Level Reproducibility Tips
+- Use **dynamic documents** every step of the way to facilitate sharing, collaborative work, and reproducibility
+  
+  * GitHub READMEs
+
+  * R Markdown/Quarto reports, .Rproj files
+
+  * Google Docs
+
+- Ideally you can share enough that your worklow is fully reproducible by an external researcher
+
+- De-identified data can usually be shared, but make all efforts to anonymize
+---
+# Code-Level Reproducibility Tips
+- READMEs!!!
+  * README should describe what is in each file &amp; the steps to reproduce the analysis
+  * Well-commented code with good variable names should make it possible for a 3rd party to work out what the script does
+
+- Use open source software (e.g., R, Python)
+
+- Avoid absolute file paths
+
+- Document hardware and software versions
+---
+# Document-Level Reproducibility Tips
+- Instead of R script comments, use R Markdown to mix commentary, code, tables, and figures
+  * Especially useful for EDA, descriptive analyses, and troubleshooting
+
+- From within RStudio, you can render the Markdown in different output formats: html, word, pdf, slides, and more
+
+- `papaja` package can render your Markdown as an APA manuscript (more on that later...)
+---
+# R Markdown Refresher
+- R Markdown combines your usual R script code with written text to create dynamic, reproducible reports 
+
+  * Write text in plain formatting
+
+  * Add chunks of R code that run when you render (i.e., "knit") the file
+
+- Knitting produces a finished report (HTML, PDF, Word, etc.) with the tables and figures already inside
+  * `knitr` is the underlying R package that executes the embedded code and weaves the results into the final document
+
+- When you edit the document and change the data/analyses/text, knit again, and everything updates (thus, a "dynamic" document)
+---
+# Quarto vs. R Markdown
+.pull-left[
+### R Markdown (.Rmd)
+- Created first, built specifically for R
+- Uses Pandoc Markdown language to integrate text with code
+- Different packages for slides, websites, books, etc.
+]
+
+.pull-right[
+### Quarto (.qmd)
+- The next-generation version of the same idea, using same language
+- Works with R, Python, and Julia
+- One tool for reports, slides, websites, books, etc.
+]
+
+**Same idea in both:** Text and code in one dynamic document
+---
+class: inverse, center, middle
+# Quarto Basics and Document Creation
+---
+# Quarto Basics
+.pull-left[
+- To create a new .qmd document, file --&gt; new file --&gt; new Quarto document
+- Select the type of document you want
+  * Usually a good idea to start with HTML, you can switch types/create multiple types easily
+- click "create"
+]
+
+.pull-right[
+&lt;img src="qcreate.png" alt="" width="80%" style="display: block; margin: auto;" /&gt;
+]
+---
+class: small-slide
+# Source vs. Visual Editing
+- There will be some code automatically generated for you to easily edit
+- There are two ways to edit code: The **source** and **visual** panes
+  * You can edit both ways regardless of the option in the "editor" code line
+
+.pull-left[
+&lt;img src="source.png" alt="" width="80%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="visual.png" alt="" width="80%" style="display: block; margin: auto;" /&gt;
+]
+---
+# YAML headers
+- The code at the very top is header code (YAML) where we provide key metadata and options for the document
+
+- At minimum we have title, author, and format; there are many options to include for output types, formatting, themes, citation styles, etc.
+
+- Here are links to [**HTML options**](https://quarto.org/docs/reference/formats/html.html), [**PDF options**](https://quarto.org/docs/reference/formats/pdf.html), and [**MS Word options**](https://quarto.org/docs/reference/formats/docx.html)
+
+&lt;img src="yaml.png" alt="" width="80%" style="display: block; margin: auto;" /&gt;
+---
+# Code Chunks
+- To include R code in your Quarto document, you will write it within a code chunk
+
+- You can create a chunk with:
+
+  * **Command + Option + I** for Mac users
+
+  * **Ctrl + Alt + I** for Window users
+
+  * Selecting the "Insert Chunk" option in the "Code" toolbar dropdown 
+
+&lt;img src="codechunk.png" alt="" width="50%" style="display: block; margin: auto;" /&gt;
+---
+# Markdown Text
+- R uses [**Pandoc's Markdown**](https://pandoc.org/MANUAL.html#pandocs-markdown) to format the text with headers, tables, links, citations, etc.
+  * We can also include hyperlinks, embedded images, inline code chunks, and more
+- Some common formatting options:
+  * `*italics*, **bold**, ***bold italics*** `
+  * `superscript^2^ / subscript~2~`
+  * `~~strikethrough~~`
+  * line breaks: `\`
+  * `# Heading 1`, `## Heading 2`, `### Heading 3`
+  * Links have text in brackets, hyperlink in parentheses
+  * `[Quarto](https://quarto.org)`
+
+Links for more markdown basics: [**Quarto**](https://quarto.org/docs/authoring/markdown-basics.html), [**RStudio**](https://rstudio.github.io/cheatsheets/html/rmarkdown.html#write-with-markdown), [**Markdown cheatsheet**](https://rstudio.github.io/cheatsheets/rmarkdown.pdf)
+---
+# Rendering 
+- You must save your document before rendering
+
+- There are several options to render:
+  * Click the "render" button
+  * Select "Render on save" and render with each save
+  * Render from the R console with the Quarto package and use `quarto::quarto_render("yourdoc.qmd")`
+
+- RStudio will usually prompt you to install required packages when you first try to render a document (e..g, knitr, rmarkdown) 
+
+- Rendering will create a preview in RStudio's Viewer and also knits an HTML document with code, output, and results from the .qmd file
+---
+# In-Class: Course Project Quarto Setup
+1. Set up a Quarto document with the following info in YAML
+  * title: `PSYC259 Data Science Final Project Report`
+  * author: `[Last name, First name]`
+  * format: `HTML`
+2. Add a block of text with a header "Project Description" and a sample sentence underneath it.
+3. Below that, add a placeholder code chunk 
+  * For now, just use `print("Hello!")` within the code chunk
+4. Before rendering, save file as:
+  * `[Lastname]_[Firstname]_PSYC259_datasci_report`
+5. Render the document
+---
+class: inverse, center, middle
+# Quarto Code and Output:&lt;br&gt;Info, Guides, Tutorials
+---
+# Quarto Extension for APA Format: apaquarto
+- [**apaquarto**](https://wjschne.github.io/apaquarto/) can be easily installed in RStudio
+- To create a new APA document:
+  * `quarto::quarto_use_template("wjschne/apaquarto", no_prompt = TRUE)`
+- To add formatting to an existing document:
+  * `quarto::quarto_add_extension("wjschne/apaquarto", no_prompt = TRUE)`
+
+---
+class: small-slide
+# Packages for Creating Nicer/APA-Style Tables
+
+These are general to R (not Quarto-specific)
+.pull-left[
+[**gtsummary**](https://www.danieldsjoberg.com/gtsummary/) package creates publication-ready summary tables
+- `tbl_summary(data)` makes descriptives tables (means, SDs, counts)
+- `tbl_regression(model)` formats regression results
+- Works in R Markdown **and** Quarto, and exports to HTML, Word, and PDF
+]
+
+.pull-right[
+[**papaja**](https://frederikaust.com/papaja_man/): APA-style manuscripts in R Markdown
+- `apa_table()` formats tables in APA style
+- `apa_print()` coverts model results to APA-formatted text (e.g., *t*(28) = 2.10, *p* = .045)
+- `theme_apa()` gives **ggplot2** figures an "APA" look (clean axes, no gridlines)
+- Built for R Markdown, so it is not a Quarto extension
+]
+- `papaja` has more helper functions than `apaquarto` (e.g., `apa_barplot()`, `apa_beeplot()`, etc.), so it is a useful addition to `apaquarto`'s functionality which is primarily document formatting
+---
+# Quarto Code Options/Tutorials
+.center[
+  Link: [**Follow along here**](https://quarto.org/docs/get-started/computations/rstudio.html)
+]
+
+- Displaying code, code folding, code linking, figures, data frames, inline code, caching
+---
+# Quarto Output Options/Tutorials
+.center[
+Link: [**Follow along here**](https://quarto.org/docs/get-started/authoring/rstudio.html)
+]
+
+- Output formats, PDFs, multiple format saving, sections/tables of contents, equations, citations, cross-referencing within document, callouts, layout options
+
+&lt;!-- adjust font size and other formatting defs in this css code chunk --&gt;
+&lt;style type="text/css"&gt;
+.remark-code{line-height: 1; font-size: 70%}
+
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+
+code.r.hljs.remark-code{
+  position: relative;
+  overflow-x: hidden;
+}
+
+.remark-slide-number {
+  opacity: 1; /* default: 0.5 */
+}
+
+.content-box { 
+    box-sizing: border-box;
+    background-color: #e2e2e2;
+}
+.content-box-blue,
+.content-box-gray,
+.content-box-grey,
+.content-box-army,
+.content-box-green,
+.content-box-purple,
+.content-box-red,
+.content-box-yellow {
+  box-sizing: border-box;
+  border-radius: 15px;
+  margin: 0 0 15px;
+  overflow: hidden;
+  padding: 0px 20px 0px 20px;
+  width: 100%;
+}
+.content-box-blue { background-color: #F0F8FF; }
+.content-box-gray { background-color: #e2e2e2; }
+.content-box-grey {	background-color: #F5F5F5; }
+.content-box-army {	background-color: #737a36; }
+.content-box-green { background-color: #d9edc2; }
+.content-box-purple { background-color: #e2e2f9; }
+.content-box-red { background-color: #ffcccc; }
+.content-box-yellow { background-color: #fef5c4; }
+.content-box-blue .remark-inline-code,
+.content-box-blue .remark-inline-code,
+.content-box-gray .remark-inline-code,
+.content-box-grey .remark-inline-code,
+.content-box-army .remark-inline-code,
+.content-box-green .remark-inline-code,
+.content-box-purple .remark-inline-code,
+.content-box-red .remark-inline-code,
+.content-box-yellow .remark-inline-code { 
+  background: none;
+}
+
+.scroll-box-8 {
+  height:8em;
+  overflow-y: scroll;
+}
+.scroll-box-10 {
+  height:10em;
+  overflow-y: scroll;
+}
+.scroll-box-12 {
+  height:12em;
+  overflow-y: scroll;
+}
+.scroll-box-14 {
+  height:14em;
+  overflow-y: scroll;
+}
+.scroll-box-16 {
+  height:16em;
+  overflow-y: scroll;
+}
+.scroll-box-18 {
+  height:18em;
+  overflow-y: scroll;
+}
+.scroll-box-20 {
+  height:20em;
+  overflow-y: scroll;
+}
+.scroll-output {
+  height: 90%;
+  overflow-y: scroll;
+}
+}
+
+/************************
+ * Font size and colours
+ ************************/
+
+/*      LaTeX style       */
+.Large       , .Large .remark-code, .Large .remark-inline-code { font-size: 144%; }
+.large       , .large .remark-code, .large .remark-inline-code { font-size: 120%; }
+.small       , .small .remark-code, .small .remark-inline-code { font-size: 90%; }
+.footnotesize, .footnotesize .remark-code, .footnotesize .remark-inline-code { font-size: 80%; }
+.scriptsize  , .scriptsize .remark-code, .scriptsize .remark-inline-code { font-size: 70%; }
+.tiny        , .tiny .remark-code, .tiny .remark-inline-code { font-size: 60%; }
+
+/* or you can be more specific */
+.font10 , .code10 .remark-code, .code10 .remark-inline-code{ font-size: 10%; }
+.font20 , .code20 .remark-code, .code20 .remark-inline-code{ font-size: 20%; }
+.font30 , .code30 .remark-code, .code30 .remark-inline-code{ font-size: 30%; }
+.font40 , .code40 .remark-code, .code40 .remark-inline-code{ font-size: 40%; }
+.font50 , .code50 .remark-code, .code50 .remark-inline-code{ font-size: 50%; }
+.font60 , .code60 .remark-code, .code60 .remark-inline-code{ font-size: 60%; }
+.font70 , .code70 .remark-code, .code70 .remark-inline-code{ font-size: 70%; }
+.font75 , .code75 .remark-code, .code75 .remark-inline-code{ font-size: 75%; }
+.font80 , .code80 .remark-code, .code80 .remark-inline-code{ font-size: 80%; }
+.font90 , .code90 .remark-code, .code90 .remark-inline-code{ font-size: 90%; }
+.font100, .code100 .remark-code, .code100 .remark-inline-code{ font-size: 100%; }
+.font110, .code110 .remark-code, .code110 .remark-inline-code{ font-size: 110%; }
+.font120, .code120 .remark-code, .code120 .remark-inline-code{ font-size: 120%; }
+.font130, .code130 .remark-code, .code130 .remark-inline-code{ font-size: 130%; }
+.font140, .code140 .remark-code, .code140 .remark-inline-code{ font-size: 140%; }
+.font150, .code150 .remark-code, .code150 .remark-inline-code{ font-size: 150%; }
+.font160, .code160 .remark-code, .code160 .remark-inline-code{ font-size: 160%; }
+.font170, .code170 .remark-code, .code170 .remark-inline-code{ font-size: 170%; }
+.font175, .code175 .remark-code, .code175 .remark-inline-code{ font-size: 175%; }
+.font180, .code180 .remark-code, .code180 .remark-inline-code{ font-size: 180%; }
+.font190, .code190 .remark-code, .code190 .remark-inline-code{ font-size: 190%; }
+.font200, .code200 .remark-code, .code200 .remark-inline-code{ font-size: 200%; }
+
+.brand-red { color: #e64626; }
+.brand-blue { color: #0148A4; }
+.brand-yellow { color: #FFB800; }
+.brand-charcoal {color: #424242; }
+.brand-gray {color: #F1F1F1;}
+.brand-grey {color: #F1F1F1;}
+.black { color: black; }
+.white { color: white; }
+.red { color: red; }
+.blue { color: blue; }
+.green { color: green; }
+.yellow { color: yellow; }
+.orange { color: orange; }
+.purple { color: purple; }
+.gray { color: gray; }
+.grey { color: gray; }
+
+.bold { font-weight: bold; }
+.bolder { font-weight: bolder; }
+&lt;/style&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "ratio": "16:9",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "%current%",
+  "navigation": {
+    "scroll": false
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
